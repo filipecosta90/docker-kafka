@@ -36,6 +36,10 @@ RUN rm metricbeat-"$METRICBEAT_VERSION"-amd64.deb
 # Update the System init script -- will not be needed by any other daemon
 RUN update-rc.d metricbeat defaults 95 10 
 
+# Enable metricbeat kafka module
+RUN metricbeat modules enable kafka 
+RUN service metricbeat start
+
 # 2181 is zookeeper, 9092 is kafka
 EXPOSE 2181 9092
 
